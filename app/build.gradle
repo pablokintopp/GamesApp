@@ -1,5 +1,20 @@
 apply plugin: 'com.android.application'
 
+def getProperty(String filename, String propName) {
+    def propsFile = rootProject.file(filename)
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        if (props[propName] != null) {
+            return props[propName]
+        } else {
+            print("No such property " + propName + " in file " + filename);
+        }
+    } else {
+        print(filename + " does not exist!")
+    }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -16,12 +31,72 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+ext{
+    daggerVersion = '2.21'
+    retrofitVersion = '2.4.0'
+    glideVersion= '4.8.0'
+    lifecycleVersion='1.1.1'
+    androidxVersion = '1.0.0'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+
+
+
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+    /* AndroidX: ConstrainLayout, RecyclerView, AppCompat, CardView,  Material */
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation "androidx.recyclerview:recyclerview:$androidxVersion"
+    implementation "androidx.appcompat:appcompat:$androidxVersion"
+    implementation "androidx.recyclerview:recyclerview:$androidxVersion"
+    implementation "androidx.cardview:cardview:$androidxVersion"
+    implementation "com.google.android.material:material:$androidxVersion"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    //Retrofit and GSON
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    //Logging OK HTTP
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    /* Android Architecture Component - LiveData & ViewModel  */
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+
+    /* Android Architecture Component - Room Persistence Lib  */
+    implementation "android.arch.persistence.room:runtime:$lifecycleVersion"
+    implementation "android.arch.persistence.room:rxjava2:$lifecycleVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$lifecycleVersion"
+
+
 }
