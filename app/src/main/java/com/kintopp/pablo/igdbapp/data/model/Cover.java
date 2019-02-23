@@ -1,4 +1,4 @@
-package com.kintopp.pablo.igdbapp.data;
+package com.kintopp.pablo.igdbapp.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

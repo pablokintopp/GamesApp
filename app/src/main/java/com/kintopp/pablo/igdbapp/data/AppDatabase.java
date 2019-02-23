@@ -1,5 +1,9 @@
 package com.kintopp.pablo.igdbapp.data;
 
+import com.kintopp.pablo.igdbapp.data.model.Cover;
+import com.kintopp.pablo.igdbapp.data.model.Game;
+import com.kintopp.pablo.igdbapp.data.model.Genre;
+
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 

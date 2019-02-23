@@ -1,5 +1,7 @@
 package com.kintopp.pablo.igdbapp.data;
 
+import com.kintopp.pablo.igdbapp.data.model.Game;
+
 import java.util.List;
 
 import androidx.room.Dao;
