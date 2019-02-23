@@ -2,14 +2,11 @@ package com.kintopp.pablo.igdbapp.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import androidx.room.Entity;
-
-@Entity(primaryKeys = ("id"))
-public class Genre implements Parcelable
-{
+public class Genre implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -43,8 +40,7 @@ public class Genre implements Parcelable
             return (new Genre[size]);
         }
 
-    }
-            ;
+    };
 
     protected Genre(Parcel in) {
         this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));

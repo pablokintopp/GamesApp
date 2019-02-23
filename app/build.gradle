@@ -44,11 +44,11 @@ android {
     }
 }
 
-ext{
+ext {
     daggerVersion = '2.21'
     retrofitVersion = '2.4.0'
-    glideVersion= '4.8.0'
-    lifecycleVersion='1.1.1'
+    glideVersion = '4.8.0'
+    lifecycleVersion = '1.1.1'
     androidxVersion = '1.0.0'
 }
 
@@ -58,6 +58,7 @@ dependencies {
 
 
 
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
@@ -74,6 +75,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
     //Retrofit and GSON

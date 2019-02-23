@@ -2,14 +2,12 @@ package com.kintopp.pablo.igdbapp.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import androidx.room.Entity;
 
-@Entity(primaryKeys = ("id"))
-public class Cover implements Parcelable
-{
+public class Cover implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -29,6 +27,12 @@ public class Cover implements Parcelable
     @SerializedName("width")
     @Expose
     private Integer width;
+    @SerializedName("alpha_channel")
+    @Expose
+    private Boolean alphaChannel;
+    @SerializedName("animated")
+    @Expose
+    private Boolean animated;
     public final static Parcelable.Creator<Cover> CREATOR = new Creator<Cover>() {
 
 
@@ -43,8 +47,7 @@ public class Cover implements Parcelable
             return (new Cover[size]);
         }
 
-    }
-            ;
+    };
 
     protected Cover(Parcel in) {
         this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
@@ -53,6 +56,8 @@ public class Cover implements Parcelable
         this.imageId = ((String) in.readValue((String.class.getClassLoader())));
         this.url = ((String) in.readValue((String.class.getClassLoader())));
         this.width = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.alphaChannel = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+        this.animated = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
     }
 
     public Cover() {
@@ -106,6 +111,22 @@ public class Cover implements Parcelable
         this.width = width;
     }
 
+    public Boolean getAlphaChannel() {
+        return alphaChannel;
+    }
+
+    public void setAlphaChannel(Boolean alphaChannel) {
+        this.alphaChannel = alphaChannel;
+    }
+
+    public Boolean getAnimated() {
+        return animated;
+    }
+
+    public void setAnimated(Boolean animated) {
+        this.animated = animated;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(game);
@@ -113,6 +134,8 @@ public class Cover implements Parcelable
         dest.writeValue(imageId);
         dest.writeValue(url);
         dest.writeValue(width);
+        dest.writeValue(alphaChannel);
+        dest.writeValue(animated);
     }
 
     public int describeContents() {
