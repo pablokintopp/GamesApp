@@ -99,6 +99,16 @@ public class Cover implements Parcelable {
         return url;
     }
 
+    public String getFormatedUrl(){
+        String url = "";
+
+        if(this.imageId != null){
+            url = "https://images.igdb.com/igdb/image/upload/t_screenshot_med/" + this.imageId + ".jpg";
+        }
+
+        return  url;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }

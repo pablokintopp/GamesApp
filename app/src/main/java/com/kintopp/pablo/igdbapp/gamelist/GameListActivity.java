@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import dagger.android.AndroidInjection;
 
 import android.os.Bundle;
 
 import com.kintopp.pablo.igdbapp.R;
+import com.kintopp.pablo.igdbapp.ViewModelFactory;
 import com.kintopp.pablo.igdbapp.data.model.Game;
 import com.kintopp.pablo.igdbapp.databinding.GameListActivityBinding;
 
@@ -19,17 +21,18 @@ import javax.inject.Inject;
 public class GameListActivity extends AppCompatActivity {
 
     @Inject
-    GameListViewModel gameListViewModel;
+    ViewModelFactory viewModelFactory;
 
+
+    private GameListViewModel gameListViewModel;
     private GameListActivityBinding binding;
-
     private GameListAdapter gameListAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         initView();
         initViewModel();
 
@@ -38,17 +41,16 @@ public class GameListActivity extends AppCompatActivity {
     private void initView() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_list);
-        binding.gamesList.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false ));
+        binding.gamesList.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         gameListAdapter = new GameListAdapter(this);
         binding.gamesList.setAdapter(gameListAdapter);
 
     }
 
-    private void initViewModel(){
-        gameListViewModel = ViewModelProviders.of(this).get(GameListViewModel.class);
-
+    private void initViewModel() {
+        gameListViewModel = ViewModelProviders.of(this, viewModelFactory).get(GameListViewModel.class);
         gameListViewModel.getGamesLiveData().observe(this, games -> {
-            if(!games.isEmpty()){
+            if (!games.isEmpty()) {
                 updateGamesList(games);
             }
         });

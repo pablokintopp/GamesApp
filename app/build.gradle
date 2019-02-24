@@ -81,6 +81,7 @@ dependencies {
     //Retrofit and GSON
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
     implementation 'com.google.code.gson:gson:2.8.5'
 
     //Logging OK HTTP

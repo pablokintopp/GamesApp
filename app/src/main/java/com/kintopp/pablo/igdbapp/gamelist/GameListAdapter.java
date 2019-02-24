@@ -67,8 +67,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.Custom
         }
 
         public void bindTo(Game game){
-            Glide.with(activity).load(game.getCover())
-                    .into(binding.imageCover);
+            if(game.getCover() != null) {
+                Glide.with(activity).load(game.getCover().getFormatedUrl())
+                        .into(binding.imageCover);
+            }
 
             binding.textGameName.setText(game.getName());
         }

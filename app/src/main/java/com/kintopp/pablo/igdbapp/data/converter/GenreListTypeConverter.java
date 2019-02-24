@@ -13,7 +13,7 @@ public class GenreListTypeConverter {
 
     @TypeConverter
     public List<Genre> fromString(String value) {
-        Type type = new TypeToken<Genre>() {
+        Type type = new TypeToken<List<Genre>>() {
         }.getType();
         List<Genre> genres = new Gson().fromJson(value, type);
         return genres;

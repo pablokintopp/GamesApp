@@ -13,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 @Module
 public class ApiModule {
@@ -26,18 +27,16 @@ public class ApiModule {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        httpBuilder.addInterceptor(loggingInterceptor);
-
-        httpBuilder.addInterceptor(chain -> {
+        return new OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(chain -> {
             Request request = chain.request();
-            Request newRequest = request.newBuilder()
+            request = request.newBuilder()
                     .addHeader(HEADER_AUTH, API_KEY)
                     .build();
-            return chain.proceed(newRequest);
-        });
+            return chain.proceed(request);
+        }).build();
 
-        return httpBuilder.build();
     }
 
     @Provides
@@ -47,6 +46,7 @@ public class ApiModule {
                 .baseUrl(baseUrl)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
