@@ -15,7 +15,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         ApiModule.class,
         DbModule.class,
         ActivityModule.class,
-        ActivityModule.class,
+        ViewModelModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent {
 
@@ -28,6 +28,6 @@ public interface AppComponent {
     }
 
 
-    public void inject(App app);
+    void inject(App app);
 
 }
