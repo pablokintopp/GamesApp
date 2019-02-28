@@ -1,5 +1,6 @@
 package com.kintopp.pablo.igdbapp.data.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
@@ -32,7 +33,7 @@ public class Game implements Parcelable {
     @SerializedName("genres")
     @Expose
     @TypeConverters(GenreListTypeConverter.class)
-    private List<Genre> genres;
+    private List<Genre> genres = new ArrayList<>();
     @SerializedName("name")
     @Expose
     private String name;

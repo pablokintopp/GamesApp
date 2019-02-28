@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.CustomViewHolder> {
 
     private Activity activity;
+    private GameListItemClickListener itemClickListener;
     private List<Game> games;
 
     public GameListAdapter(Activity activity) {
         this.activity = activity;
+        this.itemClickListener = (GameListItemClickListener) activity;
         this.games = new ArrayList<>();
     }
 
@@ -64,6 +66,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.Custom
             this.binding = binding;
 
 
+
         }
 
         public void bindTo(Game game){
@@ -73,6 +76,8 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.Custom
             }
 
             binding.textGameName.setText(game.getName());
+            binding.cardView.setOnClickListener(v -> { itemClickListener.redirectToGameDetail(game); });
         }
+
     }
 }

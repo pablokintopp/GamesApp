@@ -1,24 +1,29 @@
 package com.kintopp.pablo.igdbapp.gamelist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dagger.android.AndroidInjection;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.kintopp.pablo.igdbapp.R;
 import com.kintopp.pablo.igdbapp.ViewModelFactory;
 import com.kintopp.pablo.igdbapp.data.model.Game;
 import com.kintopp.pablo.igdbapp.databinding.GameListActivityBinding;
+import com.kintopp.pablo.igdbapp.gamedetail.GameDetailActivity;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class GameListActivity extends AppCompatActivity {
+public class GameListActivity extends AppCompatActivity implements GameListItemClickListener{
+
+    public static String INTENT_GAME = "com.kintopp.pablo.igdbapp.data.model.Game.intent";
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -62,5 +67,14 @@ public class GameListActivity extends AppCompatActivity {
         gameListAdapter.setItems(games);
     }
 
+
+    @Override
+    public void redirectToGameDetail(Game game) {
+        Intent intent = new Intent(this, GameDetailActivity.class);
+        Bundle extras = new Bundle();
+        extras.putParcelable(INTENT_GAME, game);
+        intent.putExtras(extras);
+        startActivity(intent);
+    }
 
 }

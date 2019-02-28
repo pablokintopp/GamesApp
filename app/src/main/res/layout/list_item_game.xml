@@ -12,6 +12,7 @@
         android:layout_margin="10dp"
         android:clickable="true"
         android:focusable="true"
+        android:id="@+id/card_view"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
